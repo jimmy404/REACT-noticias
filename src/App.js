@@ -12,8 +12,9 @@ async componentDidMount(){
   this.consultarNoticias();
 }
 
-  consultarNoticias = async () => {
-    const url = `https://newsapi.org/v2/top-headlines?country=ar&category=business&apiKey=5bdc8077784142db9ac390ab5b8fd753`;
+  consultarNoticias = async (categoria = 'general') => {
+    const url = `https://newsapi.org/v2/top-headlines?country=ar&category=${categoria}&apiKey=5bdc8077784142db9ac390ab5b8fd753`;
+
     const respuesta = await fetch(url);
     const noticias = await respuesta.json();
 
@@ -30,7 +31,9 @@ async componentDidMount(){
         titulo='Noticias React Api'
         />
         <div className="container white contenedor-noticias">
-          <Formulario />
+          <Formulario 
+          consultarNoticias={this.consultarNoticias}
+          />
         <ListaNoticias
         noticias={this.state.noticias}
         />
